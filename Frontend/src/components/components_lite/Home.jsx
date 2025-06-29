@@ -11,26 +11,39 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { loading, error } = useGetAllJobs(); // Trigger data fetch
-  const jobs = useSelector((state) => state.jobs.allJobs); // Access Redux state
-
-  console.log("Jobs in Component:", { loading, error, jobs }); // Log to check state
+  const { allJobs } = useSelector((state) => state.job || {}); // Use job slice
   const { user } = useSelector((store) => store.auth);
   const navigate = useNavigate();
+
+  console.log("Home - Jobs from Redux:", { loading, error, allJobs });
 
   useEffect(() => {
     if (user?.role === "Recruiter") {
       navigate("/admin/companies");
     }
-  }, []);
+  }, [user, navigate]);
 
   return (
     <div>
       <Navbar />
       <Header />
       <Categories />
-      {loading && <p>Loading jobs...</p>}
-      {error && <p>Error: {error}</p>}
-      {!loading && !error && <LatestJobs jobs={jobs} />}
+      
+      {loading && (
+        <div className="text-center py-8">
+          <p className="text-lg">Loading jobs...</p>
+        </div>
+      )}
+      
+      {error && (
+        <div className="text-center py-8">
+          <p className="text-red-500">Error: {error}</p>
+          <p className="text-gray-500 text-sm mt-2">Please try refreshing the page</p>
+        </div>
+      )}
+      
+      {!loading && !error && <LatestJobs />}
+      
       <Footer />
       <Chatbot />
     </div>

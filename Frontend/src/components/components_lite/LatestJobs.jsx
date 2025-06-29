@@ -3,7 +3,10 @@ import JobCards from "./JobCards";
 import { useSelector } from "react-redux";
 
 const LatestJobs = () => {
-  const allJobs = useSelector((state) => state.jobs?.allJobs || []); // Safely access allJobs
+  const { allJobs } = useSelector((state) => state.job || {}); // Use job slice, not jobs
+  const jobs = allJobs || []; // Ensure jobs is always an array
+
+  console.log("LatestJobs - allJobs from Redux:", jobs);
 
   return (
     <div className="max-w-7xl mx-auto my-20">
@@ -13,16 +16,21 @@ const LatestJobs = () => {
 
       {/* Job Cards */}
       <div className="grid grid-cols-3 gap-4 my-5">
-        {allJobs.length === 0 ? (
-          <span>No Job Available</span>
+        {jobs.length === 0 ? (
+          <div className="col-span-3 text-center py-8">
+            <p className="text-gray-500 text-lg">No Jobs Available</p>
+            <p className="text-gray-400 text-sm mt-2">Check back later for new opportunities!</p>
+          </div>
         ) : (
-          allJobs
+          jobs
             .slice(0, 6)
             .map((job) =>
               job?._id ? (
-                <JobCards key={job._id} job={job}></JobCards>
+                <JobCards key={job._id} job={job} />
               ) : (
-                <span key={Math.random()}>Invalid Job Data</span>
+                <div key={Math.random()} className="p-4 border rounded-lg">
+                  <span className="text-red-500">Invalid Job Data</span>
+                </div>
               )
             )
         )}

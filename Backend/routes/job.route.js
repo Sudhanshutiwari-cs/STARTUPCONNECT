@@ -1,5 +1,4 @@
 import express from "express";
-
 import authenticateToken from "../middleware/isAuthenticated.js";
 import {
   getAdminJobs,
@@ -10,8 +9,14 @@ import {
 
 const router = express.Router();
 
+// Public route - Get all jobs (no authentication required for browsing)
+router.route("/get").get(getAllJobs);
+
+// Public route - Get job by ID (no authentication required for viewing)
+router.route("/get/:id").get(getJobById);
+
+// Protected routes - Require authentication
 router.route("/post").post(authenticateToken, postJob);
-router.route("/get").get(authenticateToken, getAllJobs);
 router.route("/getadminjobs").get(authenticateToken, getAdminJobs);
-router.route("/get/:id").get(authenticateToken, getJobById);
+
 export default router;
