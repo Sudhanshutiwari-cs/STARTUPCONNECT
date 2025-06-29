@@ -9,7 +9,9 @@ import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import chatbotRoute from "./routes/chatbot.route.js";
 
-dotenv.config({});
+// Load environment variables first
+dotenv.config();
+
 const app = express();
 
 //middleware
@@ -26,9 +28,7 @@ app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 5001;
 
- 
 //api's
-
 app.use("/api/user", userRoute);
 app.use("/api/company", companyRoute);
 app.use("/api/job", jobRoute);
