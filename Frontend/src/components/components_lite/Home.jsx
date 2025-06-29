@@ -5,6 +5,7 @@ import Header from "./Header";
 import Categories from "./Categories";
 import LatestJobs from "./LatestJobs";
 import Footer from "./Footer";
+import Chatbot from "../chatbot/Chatbot";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +32,7 @@ const Home = () => {
       {error && <p>Error: {error}</p>}
       {!loading && !error && <LatestJobs jobs={jobs} />}
       <Footer />
+      <Chatbot />
     </div>
   );
 };

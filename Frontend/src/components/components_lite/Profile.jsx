@@ -6,6 +6,7 @@ import { Contact, Mail, Pen } from "lucide-react";
 import { Badge } from "../ui/badge";
 import AppliedJob from "./AppliedJob";
 import EditProfileModal from "./EditProfileModal";
+import Chatbot from "../chatbot/Chatbot";
 import { useSelector } from "react-redux";
 import useGetAppliedJobs from "@/hooks/useGetAllAppliedJobs";
 
@@ -100,6 +101,7 @@ const Profile = () => {
 
       {/* Edit Profile Modal */}
       <EditProfileModal open={open} setOpen={setOpen} />
+      <Chatbot />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import Chatbot from "../chatbot/Chatbot";
 import { useParams } from "react-router-dom";
 import { JOB_API_ENDPOINT, APPLICATION_API_ENDPOINT } from "@/utils/data";
 import axios from "axios";
@@ -165,6 +166,7 @@ const Description = () => {
           </h1>
         </div>
       </div>
+      <Chatbot />
     </div>
   );
 };
