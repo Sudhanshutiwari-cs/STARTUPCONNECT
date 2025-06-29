@@ -4,8 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
-import companyRoute from "./routes/company.route.js";
-import jobRoute from "./routes/job.route.js";
+import startupRoute from "./routes/startup.route.js";
+import opportunityRoute from "./routes/opportunity.route.js";
 import applicationRoute from "./routes/application.route.js";
 import chatbotRoute from "./routes/chatbot.route.js";
 
@@ -30,12 +30,12 @@ const PORT = process.env.PORT || 5001;
 
 //api's
 app.use("/api/user", userRoute);
-app.use("/api/company", companyRoute);
-app.use("/api/job", jobRoute);
+app.use("/api/startup", startupRoute);
+app.use("/api/opportunity", opportunityRoute);
 app.use("/api/application", applicationRoute);
 app.use("/api/chatbot", chatbotRoute);
 
 app.listen(PORT, () => {
   connectDB();
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`🚀 Startup Connect Server is running on port ${PORT}`);
 });
